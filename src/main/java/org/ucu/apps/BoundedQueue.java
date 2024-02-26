@@ -23,8 +23,8 @@ public class BoundedQueue {
 
         threads[0] = new Thread(() -> {
             for (int i = 0; i < 120; i++) {
-                queue.offer(i);
-                System.out.println("Offered: " + i);
+                var offered = queue.offer(i);
+                System.out.println("Offered " + i + " " + (offered ? "successfully" : "with failure"));
             }
         });
         for (int i = 1; i < 3; i++) {
@@ -32,7 +32,7 @@ public class BoundedQueue {
             threads[i] = new Thread(() -> {
                 for (int j = 0; j < 50; j++) {
                     try {
-                        System.out.println(Thread.currentThread().getId() + " (" + finalI + "): " + queue.take());
+                        System.out.println(finalI + " consumer got: " + queue.take());
                     } catch (InterruptedException e) {
                         throw new RuntimeException(e);
                     }
