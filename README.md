@@ -1,1 +1,1 @@
-# software_architecture
+# Task 2. Hazelcast
